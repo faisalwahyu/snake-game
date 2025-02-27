@@ -4,10 +4,12 @@ body {
     background-color: #222;
     color: white;
 }
+
 canvas {
     border: 3px solid white;
     background-color: black;
 }
+
 #controls {
     display: flex;
     flex-direction: column;

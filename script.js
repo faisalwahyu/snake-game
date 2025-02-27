@@ -44,23 +44,9 @@ function draw() {
     if (direction === "DOWN") newY += box;
 
     if (newX === food.x && newY === food.y) {
-    document.getElementById("eatSound").play(); // Play eating sound
-    score += 10;
-    document.getElementById("score").innerText = score;
-    food = {
-        x: Math.floor((Math.random() * canvas.width) / box) * box,
-        y: Math.floor((Math.random() * canvas.height) / box) * box
-    };
-}
-
-    score += 10;  // Increase score
-    document.getElementById("score").innerText = score;  // Update UI
-    food = {
-        x: Math.floor((Math.random() * canvas.width) / box) * box,
-        y: Math.floor((Math.random() * canvas.height) / box) * box
-    };
-}
-
+        document.getElementById("eatSound").play(); // Play eating sound
+        score += 10;
+        document.getElementById("score").innerText = score;
         food = {
             x: Math.floor((Math.random() * canvas.width) / box) * box,
             y: Math.floor((Math.random() * canvas.height) / box) * box
@@ -70,18 +56,29 @@ function draw() {
     }
 
     const newHead = { x: newX, y: newY };
-    
-    if (newX < 0 || newX >= canvas.width || newY < 0 || newY >= canvas.height || snake.some(segment => segment.x === newX && segment.y === newY)) {
-        document.getElementById("gameOverSound").play(); // Play game over sound
-setTimeout(() => {
-    alert("Game Over! Reload to play again.");
-    document.location.reload();
-}, 500);
 
-        document.location.reload();
+    if (newX < 0 || newX >= canvas.width || newY < 0 || newY >= canvas.height || snake.some(segment => segment.x === newX && segment.y === newY)) {
+        resetGame();
+        return;
     }
 
     snake.unshift(newHead);
+}
+
+function resetGame() {
+    document.getElementById("gameOverSound").play(); // Play game over sound
+    setTimeout(() => {
+        score = 0; 
+        document.getElementById("score").innerText = score;
+        
+        snake = [{ x: 200, y: 200 }];
+        direction = "RIGHT"; 
+
+        food = {
+            x: Math.floor((Math.random() * canvas.width) / box) * box,
+            y: Math.floor((Math.random() * canvas.height) / box) * box
+        };
+    }, 500); // Small delay so sound plays first
 }
 
 setInterval(draw, 100);
