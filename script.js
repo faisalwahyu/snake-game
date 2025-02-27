@@ -7,6 +7,7 @@ canvas.height = 400;
 const box = 20;
 let snake = [{ x: 200, y: 200 }];
 let direction = "RIGHT";
+let score = 0;
 let food = {
     x: Math.floor((Math.random() * canvas.width) / box) * box,
     y: Math.floor((Math.random() * canvas.height) / box) * box
@@ -43,6 +44,23 @@ function draw() {
     if (direction === "DOWN") newY += box;
 
     if (newX === food.x && newY === food.y) {
+    document.getElementById("eatSound").play(); // Play eating sound
+    score += 10;
+    document.getElementById("score").innerText = score;
+    food = {
+        x: Math.floor((Math.random() * canvas.width) / box) * box,
+        y: Math.floor((Math.random() * canvas.height) / box) * box
+    };
+}
+
+    score += 10;  // Increase score
+    document.getElementById("score").innerText = score;  // Update UI
+    food = {
+        x: Math.floor((Math.random() * canvas.width) / box) * box,
+        y: Math.floor((Math.random() * canvas.height) / box) * box
+    };
+}
+
         food = {
             x: Math.floor((Math.random() * canvas.width) / box) * box,
             y: Math.floor((Math.random() * canvas.height) / box) * box
@@ -54,7 +72,12 @@ function draw() {
     const newHead = { x: newX, y: newY };
     
     if (newX < 0 || newX >= canvas.width || newY < 0 || newY >= canvas.height || snake.some(segment => segment.x === newX && segment.y === newY)) {
-        alert("Game Over! Reload to play again.");
+        document.getElementById("gameOverSound").play(); // Play game over sound
+setTimeout(() => {
+    alert("Game Over! Reload to play again.");
+    document.location.reload();
+}, 500);
+
         document.location.reload();
     }
 

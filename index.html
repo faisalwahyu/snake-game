@@ -8,8 +8,19 @@
 </head>
 <body>
     <h1>Snake Game 🐍</h1>
+	<h2>Score: <span id="score">0</span></h2>
     <canvas id="gameCanvas"></canvas>
+<div id="controls">
+    <button onclick="changeDirection({ keyCode: 38 })">▲</button>
+    <div>
+        <button onclick="changeDirection({ keyCode: 37 })">◀</button>
+        <button onclick="changeDirection({ keyCode: 39 })">▶</button>
+    </div>
+    <button onclick="changeDirection({ keyCode: 40 })">▼</button>
+</div>
     <p>Use Arrow Keys to Move</p>
     <script src="script.js"></script>
+<audio id="eatSound" src="https://www.fesliyanstudios.com/play-mp3/4381"></audio>
+<audio id="gameOverSound" src="https://www.fesliyanstudios.com/play-mp3/313"></audio>
 </body>
 </html>
