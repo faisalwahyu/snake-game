@@ -8,6 +8,10 @@ const box = 20;
 let snake = [{ x: 200, y: 200 }];
 let direction = "RIGHT";
 let score = 0;
+let level = 1;
+let speed = 200; // Start speed (higher = slower)
+let gameInterval;
+
 let food = {
     x: Math.floor((Math.random() * canvas.width) / box) * box,
     y: Math.floor((Math.random() * canvas.height) / box) * box
@@ -44,9 +48,18 @@ function draw() {
     if (direction === "DOWN") newY += box;
 
     if (newX === food.x && newY === food.y) {
-        document.getElementById("eatSound").play(); // Play eating sound
+        document.getElementById("eatSound").play();
         score += 10;
         document.getElementById("score").innerText = score;
+
+        if (score % 50 === 0) { // Level up every 50 points
+            level++;
+            document.getElementById("level").innerText = level;
+            speed *= 0.9; // Increase speed (reduce interval)
+            clearInterval(gameInterval);
+            gameInterval = setInterval(draw, speed);
+        }
+
         food = {
             x: Math.floor((Math.random() * canvas.width) / box) * box,
             y: Math.floor((Math.random() * canvas.height) / box) * box
@@ -66,19 +79,49 @@ function draw() {
 }
 
 function resetGame() {
-    document.getElementById("gameOverSound").play(); // Play game over sound
+    document.getElementById("gameOverSound").play();
     setTimeout(() => {
-        score = 0; 
+        score = 0;
+        level = 1;
+        speed = 200;
         document.getElementById("score").innerText = score;
-        
+        document.getElementById("level").innerText = level;
+
         snake = [{ x: 200, y: 200 }];
-        direction = "RIGHT"; 
+        direction = "RIGHT";
 
         food = {
             x: Math.floor((Math.random() * canvas.width) / box) * box,
             y: Math.floor((Math.random() * canvas.height) / box) * box
         };
-    }, 500); // Small delay so sound plays first
+
+        startGame(); // Restart game after game over
+    }, 500);
 }
 
-setInterval(draw, 100);
+function countdown(callback) {
+    let count = 3;
+    document.getElementById("countdown").innerText = count;
+    
+    let interval = setInterval(() => {
+        count--;
+        if (count === 0) {
+            document.getElementById("countdown").innerText = "Go!";
+        } else if (count < 0) {
+            document.getElementById("countdown").innerText = "";
+            clearInterval(interval);
+            callback(); // Start game
+        } else {
+            document.getElementById("countdown").innerText = count;
+        }
+    }, 1000);
+}
+
+function startGame() {
+    clearInterval(gameInterval);
+    countdown(() => {
+        gameInterval = setInterval(draw, speed);
+    });
+}
+
+startGame();

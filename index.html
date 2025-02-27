@@ -7,24 +7,34 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Snake Game 🐍</h1>
-    <h2>Score: <span id="score">0</span></h2>
+    <h1>Game Ulaar Bubu 🐍</h1>
+    <h2>Score: <span id="score">0</span> | Level: <span id="level">1</span></h2>
+    <h2 id="countdown"></h2>
     <canvas id="gameCanvas"></canvas>
     <p>Use Arrow Keys or Buttons to Move</p>
 
     <!-- Mobile Controls -->
     <div id="controls">
-        <button onclick="changeDirection({ keyCode: 38 })">▲</button>
-        <div>
+        <div class="control-row">
+            <button class="invisible"></button>
+            <button onclick="changeDirection({ keyCode: 38 })">▲</button>
+            <button class="invisible"></button>
+        </div>
+        <div class="control-row">
             <button onclick="changeDirection({ keyCode: 37 })">◀</button>
+            <button class="invisible"></button>
             <button onclick="changeDirection({ keyCode: 39 })">▶</button>
         </div>
-        <button onclick="changeDirection({ keyCode: 40 })">▼</button>
+        <div class="control-row">
+            <button class="invisible"></button>
+            <button onclick="changeDirection({ keyCode: 40 })">▼</button>
+            <button class="invisible"></button>
+        </div>
     </div>
 
-    <!-- Sound Effects -->
-    <audio id="eatSound" src="https://www.fesliyanstudios.com/play-mp3/4381"></audio>
-    <audio id="gameOverSound" src="https://www.fesliyanstudios.com/play-mp3/313"></audio>
+    <!-- Updated Sound Effects -->
+    <audio id="eatSound" src="https://www.fesliyanstudios.com/play-mp3/397"></audio> <!-- "Ding" sound -->
+    <audio id="gameOverSound" src="https://www.fesliyanstudios.com/play-mp3/416"></audio> <!-- "Beep" sound -->
 
     <script src="script.js"></script>
 </body>
