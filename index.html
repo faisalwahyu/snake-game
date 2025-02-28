@@ -12,13 +12,22 @@
     <canvas id="gameCanvas"></canvas>
     <p id="countdown"></p>
     <div class="controls">
+    <div class="row">
+        <div class="empty"></div>
         <button onclick="changeDirection('up')">▲</button>
-        <div>
-            <button onclick="changeDirection('left')">◄</button>
-            <button onclick="changeDirection('right')">►</button>
-        </div>
-        <button onclick="changeDirection('down')">▼</button>
+        <div class="empty"></div>
     </div>
+    <div class="row">
+        <button onclick="changeDirection('left')">◄</button>
+        <div class="empty"></div>
+        <button onclick="changeDirection('right')">►</button>
+    </div>
+    <div class="row">
+        <div class="empty"></div>
+        <button onclick="changeDirection('down')">▼</button>
+        <div class="empty"></div>
+    </div>
+</div>
     <script src="script.js"></script>
 </body>
 </html>
