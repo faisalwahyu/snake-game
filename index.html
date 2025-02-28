@@ -7,31 +7,18 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Game Ulaar Bubu 🐍</h1>
-    <h2>Score: <span id="score">0</span> | Level: <span id="level">1</span></h2>
-    <h2 id="countdown"></h2>
+    <h1>Sssst 🐍</h1>
+    <p>Score: <span id="score">0</span> | Level: <span id="level">1</span></p>
     <canvas id="gameCanvas"></canvas>
-    <p>Use Arrow Keys or Buttons to Move</p>
-
-    <!-- Gamepad Layout -->
-    <div id="controls">
-        <div class="control-row">
-            <button class="invisible"></button>
-            <button onclick="changeDirection({ keyCode: 38 })">▲</button>
-            <button class="invisible"></button>
+    <p id="countdown"></p>
+    <div class="controls">
+        <button onclick="changeDirection('up')">▲</button>
+        <div>
+            <button onclick="changeDirection('left')">◄</button>
+            <button onclick="changeDirection('right')">►</button>
         </div>
-        <div class="control-row">
-            <button onclick="changeDirection({ keyCode: 37 })">◀</button>
-            <button class="invisible"></button>
-            <button onclick="changeDirection({ keyCode: 39 })">▶</button>
-        </div>
-        <div class="control-row">
-            <button class="invisible"></button>
-            <button onclick="changeDirection({ keyCode: 40 })">▼</button>
-            <button class="invisible"></button>
-        </div>
+        <button onclick="changeDirection('down')">▼</button>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
